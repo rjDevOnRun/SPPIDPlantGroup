@@ -1,0 +1,15 @@
+D:\DEVELOPMENT\SPPID_Progr\SPPIDPlantGroup\SPPIDPlantGroup\obj\Debug\SPPIDPlantGroup.csprojAssemblyReference.cache
+D:\DEVELOPMENT\SPPID_Progr\SPPIDPlantGroup\SPPIDPlantGroup\obj\Debug\MainWindow.g.cs
+D:\DEVELOPMENT\SPPID_Progr\SPPIDPlantGroup\SPPIDPlantGroup\obj\Debug\App.g.cs
+D:\DEVELOPMENT\SPPID_Progr\SPPIDPlantGroup\SPPIDPlantGroup\obj\Debug\SPPIDPlantGroup_MarkupCompile.cache
+D:\DEVELOPMENT\SPPID_Progr\SPPIDPlantGroup\SPPIDPlantGroup\obj\Debug\SPPIDPlantGroup_MarkupCompile.lref
+D:\DEVELOPMENT\SPPID_Progr\SPPIDPlantGroup\SPPIDPlantGroup\bin\Debug\SPPIDPlantGroup.exe.config
+D:\DEVELOPMENT\SPPID_Progr\SPPIDPlantGroup\SPPIDPlantGroup\bin\Debug\SPPIDPlantGroup.exe
+D:\DEVELOPMENT\SPPID_Progr\SPPIDPlantGroup\SPPIDPlantGroup\bin\Debug\SPPIDPlantGroup.pdb
+D:\DEVELOPMENT\SPPID_Progr\SPPIDPlantGroup\SPPIDPlantGroup\obj\Debug\MainWindow.baml
+D:\DEVELOPMENT\SPPID_Progr\SPPIDPlantGroup\SPPIDPlantGroup\obj\Debug\SPPIDPlantGroup.g.resources
+D:\DEVELOPMENT\SPPID_Progr\SPPIDPlantGroup\SPPIDPlantGroup\obj\Debug\SPPIDPlantGroup.Properties.Resources.resources
+D:\DEVELOPMENT\SPPID_Progr\SPPIDPlantGroup\SPPIDPlantGroup\obj\Debug\SPPIDPlantGroup.csproj.GenerateResource.cache
+D:\DEVELOPMENT\SPPID_Progr\SPPIDPlantGroup\SPPIDPlantGroup\obj\Debug\SPPIDPlantGroup.csproj.CoreCompileInputs.cache
+D:\DEVELOPMENT\SPPID_Progr\SPPIDPlantGroup\SPPIDPlantGroup\obj\Debug\SPPIDPlantGroup.exe
+D:\DEVELOPMENT\SPPID_Progr\SPPIDPlantGroup\SPPIDPlantGroup\obj\Debug\SPPIDPlantGroup.pdb
