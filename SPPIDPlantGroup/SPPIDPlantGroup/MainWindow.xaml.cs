@@ -37,25 +37,40 @@ namespace SPPIDPlantGroup
             this.dgvPG.ItemsSource = oMV.Children;
 
             //this.tvPlantGroups.ItemsSource = null;
-            this.tvPlantGroups.ItemsSource = oMV.Children;
+            this.tvPlantGroups.ItemsSource = oMV.Plantsytems;
 
         }
 
         private void TvPlantGroups_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            
+            if (sender == null) return;
 
             PlantGroup selectedPG = ((sender as TreeView).SelectedItem) as PlantGroup;
+            
+            if (selectedPG == null) return;
+            
+            List<PlantGroup> childs = oMV.FindChildren(selectedPG);
+            selectedPG.Children.AddRange(childs);
 
-            //if(selectedPG.Children.Count > 0)
-            //{
-            //    //foreach (PlantGroup pg in selectedPG.Children)
-            //    //    pg.IsExpanded = true;
-            //}
-            oMV.FindChildren(selectedPG.SPID);
+            if(selectedPG.Children.Count > 0)
+            {
+                selectedPG.IsExpanded = true;
 
-            this.dgvPG.ItemsSource = oMV.Children;
-            this.dgvPG.Items.Refresh();
+                foreach (PlantGroup pg in selectedPG.Children)
+                {
+                    pg.IsExpanded = true;
+                }
+            }
+
+            //oMV.FindChildren(selectedPG);
+
+            //this.dgvPG.ItemsSource = oMV.Children;
+            //this.dgvPG.Items.Refresh();
+
+            //this.tvPlantGroups.ItemsSource = null;
+            this.tvPlantGroups.ItemsSource = oMV.Plantsytems;
+            this.tvPlantGroups.Items.Refresh();
+            //this.tvPlantGroups.ItemsSource = oMV.Plantsytems;
         }
     }
 }

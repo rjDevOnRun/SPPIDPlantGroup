@@ -35,14 +35,13 @@
                 <TreeView.Resources>
                     <Style TargetType="TreeViewItem">
                         <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}"/>
-                        <Setter Property="HorizontalAlignment" Value="Stretch"/>
                         <Setter Property="HeaderTemplate">
                             <Setter.Value>
-                                <DataTemplate>
+                                <HierarchicalDataTemplate>
                                     <StackPanel Orientation="Horizontal">
                                         <TextBlock Text="{Binding Name}" Margin="5 0"/>
                                     </StackPanel>
-                                </DataTemplate>
+                                </HierarchicalDataTemplate>
                             </Setter.Value>
                         </Setter>
                     </Style>

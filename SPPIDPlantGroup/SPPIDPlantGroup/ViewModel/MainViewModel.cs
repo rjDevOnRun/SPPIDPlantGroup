@@ -19,8 +19,10 @@ namespace SPPIDPlantGroup
         SqlDataReader oDR = null;
 
         internal PlantGroup oRootItem = null;
-        internal List<PlantGroup> rootSystem = null;
+        internal List<PlantGroup> Plantsytems = new List<PlantGroup>();
         //List<PlantGroup> children = new List<PlantGroup>();
+        public PlantGroup SelectedPlantGroup { get; set; }
+
 
         private List<PlantGroup> _children = 
             new List<PlantGroup>();
@@ -35,6 +37,7 @@ namespace SPPIDPlantGroup
             }
         }
 
+        //internal List<PlantGroup> RootSystem { get => Plantsytems; set => Plantsytems = value; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -76,6 +79,7 @@ namespace SPPIDPlantGroup
                     pg.PlantGroupType = oDR[4].ToString();
                     pg.Path = oDR[5].ToString();
                     pg.IsExpanded = true;
+                    pg.Children = new List<PlantGroup>();
 
                     plantGroups.Add(pg);
                 }
@@ -107,6 +111,7 @@ namespace SPPIDPlantGroup
             if (this.plantGroups.Count > 0)
             {
                 oRootItem = plantGroups.Where(x => x.ParentID == "-1").FirstOrDefault();
+                Plantsytems = plantGroups.Where(x => x.ParentID == "-1").ToList();
                 oRootItem.IsExpanded = true;
 
                 if(oRootItem != null)
@@ -118,19 +123,21 @@ namespace SPPIDPlantGroup
                 oRootItem = null;
         }
 
-        internal void FindChildren(PlantGroup pgItem)
+        internal List<PlantGroup> FindChildren(PlantGroup pgItem)
         {
             _children.Clear();
 
             if (this.plantGroups.Count > 0)
             {
-                pgItem.Children = new List<PlantGroup>();
+                //pgItem.Children = new List<PlantGroup>();
 
                 _children = plantGroups.Where(x => x.ParentID == pgItem.SPID).ToList();
 
-                pgItem.Children.AddRange(_children);
+                //pgItem.Children.AddRange(_children);
+
+                //Plantsytems.AddRange(_children);
             }
-            
+            return _children;
         }
 
         internal void FindChildren(string itemSPID)
@@ -140,6 +147,8 @@ namespace SPPIDPlantGroup
                 this._children.Clear();
 
                 _children = plantGroups.Where(x => x.ParentID == itemSPID).ToList();
+
+               
             }
         }
     }
