@@ -15,32 +15,57 @@
             <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Button x:Name="btnGetGroups" Content="Get PlantGroups" 
-                Grid.Column="0" Grid.Row="0"
-                Height="auto"
-                HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                Click="BtnGetGroups_Click"/>
-        <DataGrid x:Name="dgvPG" 
-                  Grid.Column="1" Grid.Row="0" Grid.RowSpan="2"
-                  ItemsSource="{Binding plantGroups}"/>
+
+        <DockPanel Grid.Column="0" Grid.Row="0">
+            <Button x:Name="btnGetGroups" Content="Get PlantGroups" Height="auto"
+                        HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                        Click="BtnGetGroups_Click"/>
+        </DockPanel>
+
+        <DockPanel Grid.Column="1" Grid.Row="0" Grid.RowSpan="2">
+            <DataGrid x:Name="dgvPG" ItemsSource="{Binding Children}"/>
+        </DockPanel>
         
-        <TreeView x:Name="tvPlantGroups" 
-                  Grid.Column="0" Grid.Row="1"
-                      ItemsSource="{Binding rootSystem}" 
-                      SelectedItemChanged="TvPlantGroups_SelectedItemChanged">
-            <TreeView.ItemContainerStyle>
-                <Style TargetType="TreeViewItem">
-                    <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}"/>
-                </Style>
-            </TreeView.ItemContainerStyle>
-            <TreeView.ItemTemplate>
-                <HierarchicalDataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding Name}" Margin="5 0"/>
-                        <!--<TextBlock Text="{Binding SPID}"  Margin="5 0"/>-->
-                    </StackPanel>
-                </HierarchicalDataTemplate>
-            </TreeView.ItemTemplate>
-        </TreeView>
+        <DockPanel Grid.Column="0" Grid.Row="1">
+            <TreeView x:Name="tvPlantGroups" 
+                      SelectedItemChanged="TvPlantGroups_SelectedItemChanged" >
+            
+                <!-- METHOD-2 (OK): 
+                    Override the Style-HeaderTemplate in the treeview-resources -->
+                <TreeView.Resources>
+                    <Style TargetType="TreeViewItem">
+                        <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}"/>
+                        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                        <Setter Property="HeaderTemplate">
+                            <Setter.Value>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding Name}" Margin="5 0"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </TreeView.Resources>
+            </TreeView>
+        </DockPanel>
+        
     </Grid>
 </Window>
+
+
+<!-- METHOD-1 (OK):
+    
+    <TreeView.ItemContainerStyle>
+    <Style TargetType="TreeViewItem">
+        <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}"/>
+    </Style>
+</TreeView.ItemContainerStyle>
+<TreeView.ItemTemplate>
+    <HierarchicalDataTemplate>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="{Binding Name}" Margin="5 0"/>
+            --><!--<TextBlock Text="{Binding SPID}"  Margin="5 0"/>--><!--
+        </StackPanel>
+    </HierarchicalDataTemplate>
+</TreeView.ItemTemplate>-->

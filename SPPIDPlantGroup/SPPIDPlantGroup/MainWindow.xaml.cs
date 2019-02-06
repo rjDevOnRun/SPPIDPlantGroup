@@ -34,18 +34,28 @@ namespace SPPIDPlantGroup
         {
             oMV.ConnectToDB();
 
-            this.dgvPG.ItemsSource = oMV.plantGroups;
+            this.dgvPG.ItemsSource = oMV.Children;
 
             //this.tvPlantGroups.ItemsSource = null;
-            this.tvPlantGroups.ItemsSource = oMV.rootSystem;
+            this.tvPlantGroups.ItemsSource = oMV.Children;
 
         }
 
         private void TvPlantGroups_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
+            
+
             PlantGroup selectedPG = ((sender as TreeView).SelectedItem) as PlantGroup;
 
+            //if(selectedPG.Children.Count > 0)
+            //{
+            //    //foreach (PlantGroup pg in selectedPG.Children)
+            //    //    pg.IsExpanded = true;
+            //}
             oMV.FindChildren(selectedPG.SPID);
+
+            this.dgvPG.ItemsSource = oMV.Children;
+            this.dgvPG.Items.Refresh();
         }
     }
 }

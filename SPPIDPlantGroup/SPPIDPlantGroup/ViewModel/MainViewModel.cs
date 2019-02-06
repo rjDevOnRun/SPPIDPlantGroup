@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace SPPIDPlantGroup
 {
-    public class MainViewModel
+    public class MainViewModel: INotifyPropertyChanged
     {
         internal ObservableCollection<PlantGroup> plantGroups = 
             new ObservableCollection<PlantGroup>();
@@ -19,7 +20,31 @@ namespace SPPIDPlantGroup
 
         internal PlantGroup oRootItem = null;
         internal List<PlantGroup> rootSystem = null;
-        List<PlantGroup> children = new List<PlantGroup>();
+        //List<PlantGroup> children = new List<PlantGroup>();
+
+        private List<PlantGroup> _children = 
+            new List<PlantGroup>();
+
+        public List<PlantGroup> Children
+        {
+            get { return _children; }
+            set
+            {
+                _children = value;
+                NotifyPropertyHasChanged("Children");
+            }
+        }
+
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void NotifyPropertyHasChanged(string propertyname)
+        {
+            if(this.PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyname));
+            }
+        }
 
         public MainViewModel()
         {
@@ -50,7 +75,7 @@ namespace SPPIDPlantGroup
                     pg.Description = oDR[3].ToString();
                     pg.PlantGroupType = oDR[4].ToString();
                     pg.Path = oDR[5].ToString();
-                    pg.IsExpanded = false;
+                    pg.IsExpanded = true;
 
                     plantGroups.Add(pg);
                 }
@@ -58,6 +83,11 @@ namespace SPPIDPlantGroup
                 // Set the rootitem
                 this.GetPlantRootItem();
 
+                //// Find Childrens of all items
+                //foreach (PlantGroup pg in this.plantGroups)
+                //{
+                //    FindChildren(pg);
+                //}
             }
             catch (Exception ex)
             {
@@ -72,6 +102,8 @@ namespace SPPIDPlantGroup
 
         private void GetPlantRootItem()
         {
+            _children.Clear();
+
             if (this.plantGroups.Count > 0)
             {
                 oRootItem = plantGroups.Where(x => x.ParentID == "-1").FirstOrDefault();
@@ -79,20 +111,35 @@ namespace SPPIDPlantGroup
 
                 if(oRootItem != null)
                 {
-                    rootSystem = plantGroups.Where(x => x.ParentID == oRootItem.SPID).ToList();
+                    _children = plantGroups.Where(x => x.ParentID == oRootItem.SPID).ToList();
                 }
             }
             else
                 oRootItem = null;
         }
 
+        internal void FindChildren(PlantGroup pgItem)
+        {
+            _children.Clear();
+
+            if (this.plantGroups.Count > 0)
+            {
+                pgItem.Children = new List<PlantGroup>();
+
+                _children = plantGroups.Where(x => x.ParentID == pgItem.SPID).ToList();
+
+                pgItem.Children.AddRange(_children);
+            }
+            
+        }
+
         internal void FindChildren(string itemSPID)
         {
             if(this.plantGroups.Count > 0)
             {
-                this.children.Clear();
+                this._children.Clear();
 
-                children = plantGroups.Where(x => x.ParentID == itemSPID).ToList();
+                _children = plantGroups.Where(x => x.ParentID == itemSPID).ToList();
             }
         }
     }

@@ -15,6 +15,9 @@ namespace SPPIDPlantGroup
         public string PlantGroupType { get; set; }
         public string Path { get; set; }
         public bool IsExpanded { get; set; }
+
+        public List<PlantGroup> Children { get; set; }
+
         public PlantGroup()
         { }
     }
