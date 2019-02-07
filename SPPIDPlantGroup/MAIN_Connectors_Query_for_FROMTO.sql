@@ -10,6 +10,7 @@ pr.FlowDirection as FlowDirection,
 rep.ItemStatus,
 con.SP_ConnectItem1ID as ConnectItem_SPID,
 mod.ItemTypeName,
+mod.sp_id as ModelItemSpid,
 (case	when mod.ItemTypeName = 'OPC' then (select opc.sp_pairedwithid from SPPIDTestPlantpid.T_OPC opc where opc.SP_ID=mod.SP_ID)
 		when mod.ItemTypeName = 'Nozzle' then (select noz.sp_equipmentid from SPPIDTestPlantpid.T_Nozzle noz where noz.SP_ID=mod.SP_ID)
 		when mod.ItemTypeName = 'PipingComp' then (select ilc.sp_piperunid from SPPIDTestPlantpid.T_InlineComp ilc where ilc.SP_PipingCompID=mod.SP_ID)
@@ -54,10 +55,11 @@ con.SP_ID as connector_spid,
 pr.piperuntype as PipeRunType,
 pr.SP_ID as PipeRunSPID,
 pr.FlowDirection as FlowDirection,
-(select rpp.RepresentationType from SPPIDTestPlantpid.T_Representation rpp where rpp.SP_ID=con.SP_ConnectItem1ID) as representationType,
+(select rpp.RepresentationType from SPPIDTestPlantpid.T_Representation rpp where rpp.SP_ID=con.SP_ConnectItem2ID) as representationType,
 rep.ItemStatus,
 con.SP_ConnectItem2ID as ConnectItem_SPID,
 mod.ItemTypeName,
+mod.sp_id as ModelItemSpid,
 (case	when mod.ItemTypeName = 'OPC' then (select opc.sp_pairedwithid from SPPIDTestPlantpid.T_OPC opc where opc.SP_ID=mod.SP_ID)
 		when mod.ItemTypeName = 'Nozzle' then (select noz.sp_equipmentid from SPPIDTestPlantpid.T_Nozzle noz where noz.SP_ID=mod.SP_ID)
 		when mod.ItemTypeName = 'PipingComp' then (select ilc.sp_piperunid from SPPIDTestPlantpid.T_InlineComp ilc where ilc.SP_PipingCompID=mod.SP_ID)
